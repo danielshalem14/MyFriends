@@ -55,9 +55,9 @@
                 @Html.DisplayFor(modelItem => item.EmailAddress)
             </td>
             <td>
-                @Html.ActionLink("עריכה", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("עריכה", "Edit", new {  id=item.Id  }) |
                 @Html.ActionLink("פרטי חבר", "Details", new { id=item.Id  }) |
-                @Html.ActionLink("מחיקת חבר", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("מחיקת חבר", "DeleteFriend", new { id = item.Id })
             </td>
         </tr>
 }

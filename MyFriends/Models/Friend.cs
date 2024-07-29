@@ -6,7 +6,6 @@ namespace MyFriends.Models
 {
     public class Friend
     {
-
         public Friend()
         {
             Images = new List<Image>();
@@ -31,7 +30,47 @@ namespace MyFriends.Models
         public string EmailAddress { get; set; } = "";
 
         public List<Image> Images { get; set; }
+
+        [Display(Name = "הוספת תמונה"), NotMapped]
+        public IFormFile SetImage
+        {
+            get { return null; }
+            set
+            {
+                if (value == null)
+                {
+                    return;
+                }
+
+                // יצירת מקום בזיכרון עבור קובץ
+                MemoryStream stream = new MemoryStream();
+                value.CopyTo(stream);
+
+                // המרת המקום בזיכרון שיצירנו לבייטים
+                byte[] streamArray = stream.ToArray();
+
+                // הוספת התמונה לרשימת התמונות של החבר
+                AddImage(streamArray);
+            }
+
+        }
+
+        public void AddImage(byte[] image)
+        {
+            // דרך אחת לייצר מופע של קלאס
+            Image img = new()
+            {
+                MyImage = image,
+                Friend = this
+            };
+
+            // דרך שניה לייצר מופע של קלאס
+            // Image img = new Image();
+            // img.MyImage = image;
+            // img.Friend = this;
+            Images.Add(img);
+        }
     }
 }
 
-
+// Friend.SetImage = "mashu"
